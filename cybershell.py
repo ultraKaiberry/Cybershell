@@ -5,6 +5,7 @@ from rich.panel import Panel
 from random import choice
 from time import sleep
 import os
+import subprocess
 
 console = Console()
 fig = Figlet(font='slant')
@@ -41,8 +42,15 @@ def handle_command(cmd):
 
     if cmd == "python":
         os.system("python3") 
-    elif cmd.startswith("nmap "):
-        os.system(cmd)
+    import subprocess
+
+    elif cmd.startswith("nmap"):
+    try:
+        output = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT, text=True)
+        log.append(f">> Executed: {cmd}")
+        log.extend(output.strip().splitlines())
+    except subprocess.CalledProcessError as e:
+        log.append(f"[red]>> ERROR executing nmap: {e}[/red]")
         log.append(f">> Executed: {cmd}")
     elif cmd == "msfconsole":
         os.system("msfconsole")
