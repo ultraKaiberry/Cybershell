@@ -42,7 +42,7 @@ def handle_command(cmd):
     if cmd == "python":
         os.system("python3") 
     elif cmd.startswith("nmap "):
-        os.system(cmd)
+        os.system(nmap)
         log.append(f">> Executed: {cmd}")
     elif cmd == "msfconsole":
         os.system("msfconsole")
