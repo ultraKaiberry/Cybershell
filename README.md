@@ -1,4 +1,4 @@
-# Cyber_ui
+# Cyber_shell
 ui for command line 
 
 This project of mine doesn't ship
