@@ -42,19 +42,20 @@ def handle_command(cmd):
 
     if cmd == "python":
         os.system("python3") 
-    import subprocess
 
     elif cmd.startswith("nmap"):
-    try:
-        output = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT, text=True)
-        log.append(f">> Executed: {cmd}")
-        log.extend(output.strip().splitlines())
-    except subprocess.CalledProcessError as e:
-        log.append(f"[red]>> ERROR executing nmap: {e}[/red]")
-        log.append(f">> Executed: {cmd}")
+        try:
+            output = subprocess.check_output(cmd, shell=True, stderr=subprocess.STDOUT, text=True)
+            log.append(f">> Executed: {cmd}")
+            log.extend(output.strip().splitlines())
+        except subprocess.CalledProcessError as e:
+            log.append(f"[red]>> ERROR executing nmap: {e}[/red]")
+            log.append(f">> Executed: {cmd}")
+
     elif cmd == "msfconsole":
         os.system("msfconsole")
         log.append(">> Launched msfconsole")
+
     elif cmd.startswith("open "):
         filename = cmd.split(" ", 1)[1]
         try:
@@ -64,6 +65,7 @@ def handle_command(cmd):
             log.append(contents)
         except FileNotFoundError:
             log.append(f"[red]>> FILE NOT FOUND: {filename}[/red]")
+
     elif cmd.startswith("write "):
         parts = cmd.split(" ", 2)
         if len(parts) < 3:
@@ -73,6 +75,7 @@ def handle_command(cmd):
             with open(filename, 'w') as f:
                 f.write(content)
             log.append(f">> WROTE TO FILE: {filename}")
+
     else:
         log.append(">> UNKNOWN COMMAND")
 
