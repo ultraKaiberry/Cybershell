@@ -15,10 +15,3 @@ Use `elif` blocks to map new commands. Here’s the pattern:
 elif cmd.startswith("your-command"):
     os.system(cmd)
     log.append(f">> Executed: {cmd}")
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](./LICENSE).  
-Feel free to use, remix, and build upon it — just give credit. ❤️
